@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "recruiter")
 public class Recruiter extends  User{
     @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL)
     private List<JobOffer> jobOffers;

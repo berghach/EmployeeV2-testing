@@ -1,9 +1,13 @@
 package entities;
 
 import enums.UsersRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
+@Entity
+@Table(name = "admin")
 public class Admin extends User{
 
     public Admin(){

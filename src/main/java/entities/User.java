@@ -12,7 +12,7 @@ import java.util.List;
     //each class in the inheritance hierarchy (parent and child classes) has its own table.
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private long id;
 
