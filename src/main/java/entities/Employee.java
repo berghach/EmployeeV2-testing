@@ -1,0 +1,230 @@
+package entities;
+
+import enums.UsersRole;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Table(name = "employee")
+public class Employee extends User{
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @Column(name = "ussn", unique = true)
+    private Integer ussn;
+
+    @Column(name = "hiring_date")
+    private LocalDate hiringDate;
+
+    @Column(name = "salary")
+    private Double salary;
+
+    @Column(name = "holiday_credit")
+    private Integer holidayCredit;
+
+    @Column(name = "kids")
+    private Integer kids;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false, foreignKey = @ForeignKey(name = "fk_employee_department"))
+    private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id", nullable = false, foreignKey = @ForeignKey(name = "fk_job"))
+    private Job job;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Absence> absences;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Allowance> allowances;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Holiday> holidays;
+
+    public Employee() {
+        super();
+    }
+
+    public Employee(String name, String email, String password, String phone, String address, UsersRole userRole, LocalDate birthDate, Integer ussn, LocalDate hiringDate, Double salary, Integer holidayCredit, Integer kids, Department department, Job job) {
+        super(name, email, password, phone, address, userRole);
+        this.birthDate = birthDate;
+        this.ussn = ussn;
+        this.hiringDate = hiringDate;
+        this.salary = salary;
+        this.holidayCredit = holidayCredit;
+        this.kids = kids;
+        this.department = department;
+        this.job = job;
+    }
+
+    @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public String getEmail() {
+        return super.getEmail();
+    }
+
+    @Override
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
+    @Override
+    public String getPassword() {
+        return super.getPassword();
+    }
+
+    @Override
+    public void setPassword(String password) {
+        super.setPassword(password);
+    }
+
+    @Override
+    public String getPhone() {
+        return super.getPhone();
+    }
+
+    @Override
+    public void setPhone(String phone) {
+        super.setPhone(phone);
+    }
+
+    @Override
+    public String getAddress() {
+        return super.getAddress();
+    }
+
+    @Override
+    public void setAddress(String address) {
+        super.setAddress(address);
+    }
+
+    @Override
+    public UsersRole getUserRole() {
+        return super.getUserRole();
+    }
+
+    @Override
+    public void setUserRole(UsersRole userRole) {
+        super.setUserRole(userRole);
+    }
+
+    @Override
+    public List<Notification> getNotifications() {
+        return super.getNotifications();
+    }
+
+    @Override
+    public void setNotifications(List<Notification> notifications) {
+        super.setNotifications(notifications);
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Integer getUssn() {
+        return ussn;
+    }
+
+    public void setUssn(Integer ussn) {
+        this.ussn = ussn;
+    }
+
+    public LocalDate getHiringDate() {
+        return hiringDate;
+    }
+
+    public void setHiringDate(LocalDate hiringDate) {
+        this.hiringDate = hiringDate;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Integer getHolidayCredit() {
+        return holidayCredit;
+    }
+
+    public void setHolidayCredit(Integer holidayCredit) {
+        this.holidayCredit = holidayCredit;
+    }
+
+    public Integer getKids() {
+        return kids;
+    }
+
+    public void setKids(Integer kids) {
+        this.kids = kids;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
+    public List<Absence> getAbsences() {
+        return absences;
+    }
+
+    public void setAbsences(List<Absence> absences) {
+        this.absences = absences;
+    }
+
+    public List<Allowance> getAllowances() {
+        return allowances;
+    }
+
+    public void setAllowances(List<Allowance> allowances) {
+        this.allowances = allowances;
+    }
+
+    public List<Holiday> getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(List<Holiday> holidays) {
+        this.holidays = holidays;
+    }
+}

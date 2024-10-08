@@ -5,9 +5,17 @@
              version="2.1">
 
     <persistence-unit name="employeeV2Unit" transaction-type="RESOURCE_LOCAL">
+        <class>enums.UsersRole</class>
+        <class>entities.User</class>
+        <class>entities.Notification</class>
+        <class>entities.Admin</class>
+        <class>entities.Recruiter</class>
+        <class>entities</class>
+        <class>entities</class>
 
         <properties>
             <property name="javax.persistence.provider" value="org.hibernate.jpa.HibernatePersistenceProvider" />
+            <!-- Specifying classes -->
 
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/employees_v2" /> <!-- BD Mane -->
