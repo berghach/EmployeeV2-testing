@@ -2,12 +2,14 @@ package entities;
 
 import enums.UsersRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 import java.util.List;
 
 @Entity
 @Table(name = "admin")
+@NamedQuery(name = "get all admins", query = "SELECT a FROM Admin a")
 public class Admin extends User{
 
     public Admin(){

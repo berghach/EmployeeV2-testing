@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "holiday")
+@NamedQuery(name = "get all holidays", query = "SELECT h FROM Holiday h")
 public class Holiday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +47,14 @@ public class Holiday {
         this.endDate = endDate;
         this.accepted = accepted;
         this.employee = employee;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSubject() {

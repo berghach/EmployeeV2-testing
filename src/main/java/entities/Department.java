@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "department")
+@NamedQuery(name = "get all departments", query = "SELECT d FROM Department d")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

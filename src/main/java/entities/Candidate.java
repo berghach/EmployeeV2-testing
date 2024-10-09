@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "candidate")
+@NamedQuery(name = "get all candidates", query = "SELECT c FROM Candidate c")
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "recruiter")
+@NamedQuery(name = "get all recruiters", query = "SELECT r FROM Recruiter r")
 public class Recruiter extends  User{
     @OneToMany(mappedBy = "recruiter", cascade = CascadeType.ALL)
     private List<JobOffer> jobOffers;

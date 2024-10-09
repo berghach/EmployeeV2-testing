@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "job_offer")
+@NamedQuery(name = "get all jobOffers", query = "SELECT j FROM JobOffer j")
 public class JobOffer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

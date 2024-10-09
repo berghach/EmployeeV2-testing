@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "notification")
+@NamedQuery(name = "get all notifications", query = "SELECT n FROM Notification n")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
