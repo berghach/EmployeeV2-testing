@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
     //each class in the inheritance hierarchy (parent and child classes) has its own table.
+@NamedQuery(name = "get all users", query = "SELECT u FROM User u")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
