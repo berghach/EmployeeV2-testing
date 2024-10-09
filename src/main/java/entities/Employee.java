@@ -45,6 +45,9 @@ public class Employee extends User{
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Holiday> holidays;
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmployeeChange> employeeChanges;
+
     public Employee() {
         super();
     }
@@ -227,5 +230,13 @@ public class Employee extends User{
 
     public void setHolidays(List<Holiday> holidays) {
         this.holidays = holidays;
+    }
+
+    public List<EmployeeChange> getEmployeeChanges() {
+        return employeeChanges;
+    }
+
+    public void setEmployeeChanges(List<EmployeeChange> employeeChanges) {
+        this.employeeChanges = employeeChanges;
     }
 }

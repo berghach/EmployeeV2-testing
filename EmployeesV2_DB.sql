@@ -118,6 +118,17 @@ CREATE TABLE IF NOT EXISTS holiday (
 		references employee(id)
 );
 
+CREATE TABLE IF NOT EXISTS employee_change (
+    id serial,
+    field varchar(30),
+    old_value varchar(30),
+    new_value varchar(30),
+    employee_id int,
+    CONSTRAINT pk_employee_change primary key(id),
+    CONSTRAINT fk_employee FOREIGN KEY(employee_id)
+        REFERENCES employee(id)
+);
+
 ALTER TABLE users
 ADD CONSTRAINT uc_users UNIQUE (email);
 
@@ -173,3 +184,7 @@ ALTER COLUMN valid SET DEFAULT true;
 
 ALTER TABLE employee
 ADD CONSTRAINT uc_employee_ussn UNIQUE (ussn);
+
+ALTER TABLE employee_change
+ADD CONSTRAINT fk_employee FOREIGN KEY (employee_id)
+    REFERENCES employee(id) ON DELETE CASCADE;
