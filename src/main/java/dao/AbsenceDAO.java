@@ -1,55 +1,54 @@
 package dao;
 
-import entities.User;
+import entities.Absence;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.SystemException;
 import util.JPAUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAO implements DAO<User> {
+public class AbsenceDAO implements DAO<Absence>{
     @Override
-    public Optional<User> get(long id) {
+    public Optional<Absence> get(long id) {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        User user = null;
+        Absence absence = null;
         try {
-            user = entityManager.find(User.class, id);
+            absence = entityManager.find(Absence.class, id);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } finally {
             entityManager.close();
         }
-        return Optional.ofNullable(user);
+        return Optional.ofNullable(absence);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Absence> getAll() {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        List<User> users = null;
+        List<Absence> absences = null;
         try{
-            TypedQuery<User> userTypedQuery = entityManager.createNamedQuery("get all users", User.class);
-            users = userTypedQuery.getResultList();
+            TypedQuery<Absence> absenceTypedQuery = entityManager.createNamedQuery("get all absences", Absence.class);
+            absences = absenceTypedQuery.getResultList();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             entityManager.close();
         }
-        return users;
+        return absences;
     }
 
     @Override
-    public boolean save(User user) throws SystemException {
+    public boolean save(Absence absence) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.persist(user);
+            entityManager.persist(absence);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -65,14 +64,14 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean update(User user) throws SystemException {
+    public boolean update(Absence absence) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.merge(user);
+            entityManager.merge(absence);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -88,16 +87,16 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean delete(User user) throws SystemException {
+    public boolean delete(Absence absence) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            User managedUser = entityManager.find(User.class, user.getId());
-            if (managedUser != null) {
-                entityManager.remove(managedUser);
+            Absence managedAbsence = entityManager.find(Absence.class, absence.getId());
+            if (managedAbsence != null) {
+                entityManager.remove(managedAbsence);
                 transaction.commit();
                 success = true;
             }

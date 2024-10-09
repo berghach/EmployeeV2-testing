@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "employee")
+@NamedQuery(name = "get all employees", query = "SELECT e FROM Employee e")
 public class Employee extends User{
     @Column(name = "birth_date")
     private LocalDate birthDate;

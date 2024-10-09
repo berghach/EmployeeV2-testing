@@ -1,55 +1,54 @@
 package dao;
 
-import entities.User;
+import entities.JobOffer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.SystemException;
 import util.JPAUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAO implements DAO<User> {
+public class JobOfferDAO implements DAO<JobOffer> {
     @Override
-    public Optional<User> get(long id) {
+    public Optional<JobOffer> get(long id) {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        User user = null;
+        JobOffer jobOffer = null;
         try {
-            user = entityManager.find(User.class, id);
+            jobOffer = entityManager.find(JobOffer.class, id);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } finally {
             entityManager.close();
         }
-        return Optional.ofNullable(user);
+        return Optional.ofNullable(jobOffer);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<JobOffer> getAll() {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        List<User> users = null;
+        List<JobOffer> jobOffers = null;
         try{
-            TypedQuery<User> userTypedQuery = entityManager.createNamedQuery("get all users", User.class);
-            users = userTypedQuery.getResultList();
+            TypedQuery<JobOffer> userTypedQuery = entityManager.createNamedQuery("get all jobOffers", JobOffer.class);
+            jobOffers = userTypedQuery.getResultList();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             entityManager.close();
         }
-        return users;
+        return jobOffers;
     }
 
     @Override
-    public boolean save(User user) throws SystemException {
+    public boolean save(JobOffer jobOffer) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.persist(user);
+            entityManager.persist(jobOffer);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -65,14 +64,14 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean update(User user) throws SystemException {
+    public boolean update(JobOffer jobOffer) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.merge(user);
+            entityManager.merge(jobOffer);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -88,16 +87,16 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean delete(User user) throws SystemException {
+    public boolean delete(JobOffer jobOffer) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            User managedUser = entityManager.find(User.class, user.getId());
-            if (managedUser != null) {
-                entityManager.remove(managedUser);
+            JobOffer managedJobOffer = entityManager.find(JobOffer.class, jobOffer.getId());
+            if (managedJobOffer != null) {
+                entityManager.remove(managedJobOffer);
                 transaction.commit();
                 success = true;
             }

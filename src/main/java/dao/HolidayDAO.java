@@ -1,55 +1,54 @@
 package dao;
 
-import entities.User;
+import entities.Holiday;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.SystemException;
 import util.JPAUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAO implements DAO<User> {
+public class HolidayDAO implements DAO<Holiday> {
     @Override
-    public Optional<User> get(long id) {
+    public Optional<Holiday> get(long id) {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        User user = null;
+        Holiday holiday = null;
         try {
-            user = entityManager.find(User.class, id);
+            holiday = entityManager.find(Holiday.class, id);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } finally {
             entityManager.close();
         }
-        return Optional.ofNullable(user);
+        return Optional.ofNullable(holiday);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Holiday> getAll() {
         EntityManager entityManager = JPAUtil.getEntityManager();
-        List<User> users = null;
+        List<Holiday> holidays = null;
         try{
-            TypedQuery<User> userTypedQuery = entityManager.createNamedQuery("get all users", User.class);
-            users = userTypedQuery.getResultList();
+            TypedQuery<Holiday> holidayTypedQuery = entityManager.createNamedQuery("get all holidays", Holiday.class);
+            holidays = holidayTypedQuery.getResultList();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             entityManager.close();
         }
-        return users;
+        return holidays;
     }
 
     @Override
-    public boolean save(User user) throws SystemException {
+    public boolean save(Holiday holiday) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.persist(user);
+            entityManager.persist(holiday);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -65,14 +64,14 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean update(User user) throws SystemException {
+    public boolean update(Holiday holiday) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            entityManager.merge(user);
+            entityManager.merge(holiday);
             transaction.commit();
             success = true;
         } catch (Exception e) {
@@ -88,16 +87,16 @@ public class UserDAO implements DAO<User> {
     }
 
     @Override
-    public boolean delete(User user) throws SystemException {
+    public boolean delete(Holiday holiday) throws SystemException {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         boolean success = false;
 
         try {
             transaction.begin();
-            User managedUser = entityManager.find(User.class, user.getId());
-            if (managedUser != null) {
-                entityManager.remove(managedUser);
+            Holiday managedHoliday = entityManager.find(Holiday.class, holiday.getId());
+            if (managedHoliday != null) {
+                entityManager.remove(managedHoliday);
                 transaction.commit();
                 success = true;
             }

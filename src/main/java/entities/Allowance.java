@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "allowance")
+@NamedQuery(name = "get all allowances", query = "SELECT a FROM Allowance a")
 public class Allowance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
