@@ -20,10 +20,8 @@ public class JPATest {
     }
     @Test
     public void testConnection() {
-        // Check if the EntityManager is not null, meaning the connection is established
         assertNotNull(entityManager);
 
-        // Start a transaction and commit it (even though no operations are performed)
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         transaction.commit();
