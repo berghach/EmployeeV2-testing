@@ -14,14 +14,11 @@ public class JPATest {
 
     @Before
     public void setUp() {
-        // Initialize EntityManagerFactory using the persistence unit name
         entityManagerFactory = Persistence.createEntityManagerFactory("employeeV2Unit");
         entityManager = entityManagerFactory.createEntityManager();
     }
     @Test
     public void testConnection() {
-        assertNotNull(entityManager);
-
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         transaction.commit();
