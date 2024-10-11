@@ -104,9 +104,11 @@ public class ManageEmployeeServlet extends HttpServlet {
                 doDelete(req, resp);
                 break;
             case "POST":
-            default:
                 createEmployee(req, resp);
                 break;
+            default:
+                resp.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                resp.getWriter().write("Error: Unsupported or invalid method.");
         }
     }
 
