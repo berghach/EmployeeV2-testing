@@ -83,24 +83,8 @@ public class ManageAllowanceServlet extends HttpServlet {
 
             if (optionalEmployee.isPresent()) {
                 Employee employee = optionalEmployee.get();
-                Double salary = employee.getSalary();
-                int kids = employee.getKids() > 6 ? 6 : employee.getKids();
-                double totalAmount = 0.0;
-
-                if (!(salary < 8000 && salary > 6000)) {
-                    if (salary <= 6000) {
-                        if (kids <= 3) {
-                            totalAmount = 300 * kids;
-                        } else {
-                            totalAmount = (300 * 3) + (150 * (kids - 3));
-                        }
-                    } else if (salary >= 8000) {
-                        if (kids <= 3) {
-                            totalAmount = 200 * kids;
-                        } else {
-                            totalAmount = (200 * 3) + (110 * (kids - 3));
-                        }
-                    }
+                double totalAmount = allowanceService.calculateAllowanceAmount(employee);
+                if (totalAmount != 0) {
 
                     Allowance allowance = new Allowance(totalAmount, new Date(), employee);
                     allowanceService.save(allowance);
