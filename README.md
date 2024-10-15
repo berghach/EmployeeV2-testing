@@ -9,3 +9,11 @@
 Le package service (trouver une méthode pour tester le package tout entier)
 
 Et les méthodes de calculateAllowanceAmount() et getAllowanceStatistics()
+
+## La priorisation des cas de test:
+
+**P1:** EmployeeService, HolidayService, calculateAllowanceAmount(), AllowanceService, getAllowanceStatistics(), JPAUtil
+
+**P2:** EmployeeChangeService, CandidateService, JobOfferService
+
+**P3:** AbsenceService, 
