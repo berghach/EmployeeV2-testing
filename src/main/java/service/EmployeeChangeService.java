@@ -33,9 +33,9 @@ public class EmployeeChangeService implements Service<EmployeeChange> {
         List<EmployeeChange> employeeChanges = new ArrayList<>();
 
         oldEmployeeData.getChangedFieldsReflective(newEmployeeData).forEach(
-                employeeChanges.add(new EmployeeChange(
-
-                ))
+                employeeChanges.add((field, value) -> {
+                    new EmployeeChange(field, , )
+                })
         );
 
         return employeeChanges;
