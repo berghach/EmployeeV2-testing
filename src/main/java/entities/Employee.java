@@ -3,8 +3,12 @@ package entities;
 import enums.UsersRole;
 import jakarta.persistence.*;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
@@ -62,6 +66,24 @@ public class Employee extends User{
         this.kids = kids;
         this.department = department;
         this.job = job;
+    }
+
+
+    public Map<String, Object> getChangedFieldsReflective(Employee other) throws IllegalAccessException {
+        Map<String, Object> changedFields = new HashMap<>();
+
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            Object value1 = field.get(this);
+            Object value2 = field.get(other);
+
+            if (!Objects.equals(value1, value2)) {
+                changedFields.put(field.getName(), value2);
+            }
+        }
+        return changedFields;
     }
 
     @Override

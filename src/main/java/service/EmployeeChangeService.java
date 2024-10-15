@@ -8,6 +8,7 @@ import jakarta.transaction.SystemException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class EmployeeChangeService implements Service<EmployeeChange> {
@@ -26,6 +27,18 @@ public class EmployeeChangeService implements Service<EmployeeChange> {
             System.out.println("Operation not supported: " + e.getMessage());
             return new ArrayList<>();
         }
+    }
+
+    public List<EmployeeChange> getEmployeeChangedFields(Employee oldEmployeeData, Employee newEmployeeData) throws IllegalAccessException {
+        List<EmployeeChange> employeeChanges = new ArrayList<>();
+
+        oldEmployeeData.getChangedFieldsReflective(newEmployeeData).forEach(
+                employeeChanges.add(new EmployeeChange(
+
+                ))
+        );
+
+        return employeeChanges;
     }
 
     @Override
