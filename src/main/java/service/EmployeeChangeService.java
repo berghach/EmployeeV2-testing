@@ -32,11 +32,9 @@ public class EmployeeChangeService implements Service<EmployeeChange> {
     public List<EmployeeChange> getEmployeeChangedFields(Employee oldEmployeeData, Employee newEmployeeData) throws IllegalAccessException {
         List<EmployeeChange> employeeChanges = new ArrayList<>();
 
-        oldEmployeeData.getChangedFieldsReflective(newEmployeeData).forEach(
-                employeeChanges.add((field, value) -> {
-                    new EmployeeChange(field, , )
-                })
-        );
+        oldEmployeeData.getChangedFieldsReflective(newEmployeeData).forEach((field, values) -> {
+            employeeChanges.add(new EmployeeChange(field, values.get(0).toString(), values.get(1).toString(), oldEmployeeData));
+        });
 
         return employeeChanges;
     }

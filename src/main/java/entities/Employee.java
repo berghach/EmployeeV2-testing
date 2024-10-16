@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "employee")
@@ -69,18 +66,22 @@ public class Employee extends User{
     }
 
 
-    public Map<String, Object> getChangedFieldsReflective(Employee other) throws IllegalAccessException {
-        Map<String, Object> changedFields = new HashMap<>();
+    public Map<String, List<Objects>> getChangedFieldsReflective(Employee other) throws IllegalAccessException {
+        Map<String, List<Objects>> changedFields = new HashMap<>();
 
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
 
-            Object value1 = field.get(this);
-            Object value2 = field.get(other);
+            Object oldValue = field.get(this);
+            Object newValue = field.get(other);
 
-            if (!Objects.equals(value1, value2)) {
-                changedFields.put(field.getName(), value2);
+            ArrayList<Objects> values = new ArrayList<>();
+            values.add(0,(Objects) oldValue);
+            values.add(1,(Objects) newValue);
+
+            if (!Objects.equals(oldValue, newValue)) {
+                changedFields.put(field.getName(), values);
             }
         }
         return changedFields;

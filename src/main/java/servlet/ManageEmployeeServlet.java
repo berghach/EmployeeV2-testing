@@ -5,6 +5,7 @@ import entities.Employee;
 import entities.EmployeeChange;
 import entities.Job;
 import enums.UsersRole;
+import jakarta.transaction.SystemException;
 import service.DepartmentService;
 import service.EmployeeChangeService;
 import service.EmployeeService;
@@ -151,6 +152,7 @@ public class ManageEmployeeServlet extends HttpServlet {
 
             if (employeeOptional.isPresent()) {
                 Employee employee = employeeOptional.get();
+                Employee oldEmployeeData = employee;
                 String name = req.getParameter("name");
                 String email = req.getParameter("email");
                 String password = req.getParameter("password");
@@ -180,6 +182,17 @@ public class ManageEmployeeServlet extends HttpServlet {
                 employee.setDepartment(department.orElse(null));
                 employee.setJob(job.orElse(null));
 
+                Employee newEmployeeData = employee;
+
+                employeeChangeService.getEmployeeChangedFields(oldEmployeeData, newEmployeeData).forEach(
+                        change -> {
+                            try {
+                                employeeChangeService.save(change);
+                            } catch (SystemException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                );
                 employeeService.update(employee);
                 resp.sendRedirect("/");
             } else {
