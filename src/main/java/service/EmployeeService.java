@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmployeeService implements Service<Employee> {
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+    private final EmployeeDAO employeeDAO;
+
+    public EmployeeService(EmployeeDAO employeeDAO) {
+        this.employeeDAO = employeeDAO;
+    }
 
     @Override
     public Optional<Employee> get(long id) {
