@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class HolidayService implements Service<Holiday> {
-    private final HolidayDAO holidayDAO = new HolidayDAO();
+    private final HolidayDAO holidayDAO;
+
+    public HolidayService(HolidayDAO holidayDAO) {
+        this.holidayDAO = holidayDAO;
+    }
 
     @Override
     public Optional<Holiday> get(long id) {
