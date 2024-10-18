@@ -12,7 +12,11 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EmployeeChangeService implements Service<EmployeeChange> {
-    private final EmployeeChangeDAO employeeChangeDAO = new EmployeeChangeDAO();
+    private final EmployeeChangeDAO employeeChangeDAO;
+
+    public EmployeeChangeService(EmployeeChangeDAO employeeChangeDAO) {
+        this.employeeChangeDAO = employeeChangeDAO;
+    }
 
     @Override
     public Optional<EmployeeChange> get(long id) {

@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.EmployeeChangeDAO;
 import dao.EmployeeDAO;
 import entities.Department;
 import entities.Employee;
@@ -33,7 +34,8 @@ public class ManageEmployeeServlet extends HttpServlet {
     public void init() throws ServletException {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         employeeService = new EmployeeService(employeeDAO);
-        employeeChangeService = new EmployeeChangeService();
+        EmployeeChangeDAO employeeChangeDAO  = new EmployeeChangeDAO();
+        employeeChangeService = new EmployeeChangeService(employeeChangeDAO);
         departmentService = new DepartmentService();
         jobService = new JobService();
     }
