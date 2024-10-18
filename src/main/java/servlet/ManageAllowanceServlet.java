@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.AllowanceDAO;
 import dao.EmployeeDAO;
 import entities.Allowance;
 import entities.Employee;
@@ -22,7 +23,8 @@ public class ManageAllowanceServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        allowanceService = new AllowanceService();
+        AllowanceDAO allowanceDAO = new AllowanceDAO();
+        allowanceService = new AllowanceService(allowanceDAO);
         EmployeeDAO employeeDAO = new EmployeeDAO();
         employeeService = new EmployeeService(employeeDAO);
     }

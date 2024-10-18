@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.AllowanceDAO;
 import service.AllowanceService;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,8 @@ public class ManageReportServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        allowanceService = new AllowanceService();
+        AllowanceDAO allowanceDAO = new AllowanceDAO();
+        allowanceService = new AllowanceService(allowanceDAO);
     }
 
     @Override
