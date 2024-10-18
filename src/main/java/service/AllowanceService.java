@@ -14,7 +14,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AllowanceService implements Service<Allowance> {
-    private final AllowanceDAO allowanceDAO = new AllowanceDAO();
+    private final AllowanceDAO allowanceDAO;
+
+    public AllowanceService(AllowanceDAO allowanceDAO) {
+        this.allowanceDAO = allowanceDAO;
+    }
 
     @Override
     public Optional<Allowance> get(long id) {
@@ -49,14 +53,14 @@ public class AllowanceService implements Service<Allowance> {
         int kids = employee.getKids() > 6 ? 6 : employee.getKids();
         double totalAmount = 0.0;
 
-        if (!(salary < 8000 && salary > 6000)) {
+        if (!(salary < 8000 && salary > 6000) && kids > 0) {
             if (salary <= 6000) {
                 if (kids <= 3) {
                     totalAmount = 300 * kids;
                 } else {
                     totalAmount = (300 * 3) + (150 * (kids - 3));
                 }
-            } else if (salary >= 8000) {
+            } else {
                 if (kids <= 3) {
                     totalAmount = 200 * kids;
                 } else {

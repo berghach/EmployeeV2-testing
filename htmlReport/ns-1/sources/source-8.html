@@ -84,8 +84,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;import java.util.Optional;
 &nbsp;
-<b class="nc">&nbsp;public class HolidayService implements Service&lt;Holiday&gt; {</b>
-<b class="nc">&nbsp;    private final HolidayDAO holidayDAO = new HolidayDAO();</b>
+&nbsp;public class HolidayService implements Service&lt;Holiday&gt; {
+&nbsp;    private final HolidayDAO holidayDAO;
+&nbsp;
+<b class="nc">&nbsp;    public HolidayService(HolidayDAO holidayDAO) {</b>
+<b class="nc">&nbsp;        this.holidayDAO = holidayDAO;</b>
+&nbsp;    }
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public Optional&lt;Holiday&gt; get(long id) {
@@ -135,7 +139,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-17 11:55</div>
+    <div style="float:right;">generated on 2024-10-18 11:49</div>
 </div>
 </body>
 </html>
